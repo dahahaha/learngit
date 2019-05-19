@@ -3,14 +3,12 @@
 
 #include "MD5.h"
 #include "RollingCode.h"
+#include "EncDecInterface.h"
 
 
 /* Authoritarian Data*/
 
-#define ENCDATAMAXSIZE       (15)
 #define FIFOQUEUEMAXSIZE     (10)
-
-typedef unsigned int (QueueElemType)[ENCDATAMAXSIZE]; //frist Index  data lenght
 
 typedef enum
 {

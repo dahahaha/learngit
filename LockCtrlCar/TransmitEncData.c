@@ -1,4 +1,5 @@
 #include "TransmitEncData.h"
+#include "EncDecInterface.h"
 
 FIFOStatus InitFIFO(FIFO_QUEUE *QUEUE_FIFO)
 {
@@ -40,4 +41,17 @@ FIFOStatus DeFIFO(FIFO_QUEUE *QUEUE_FIFO,QueueElemType *ElemData)
 
     return FIFO_OK;
     
+}
+
+int Data_Key(EncDataFunc EncFunc,QueueElemType* InData,\
+             QueueElemType* OutData ,void *Ref,int RefLen)
+{
+    int rv;
+
+    if( NULL != EncFunc)
+    {
+        rv = EncFunc(InData,OutData,NULL,0);
+    }
+
+    return rv;
 }

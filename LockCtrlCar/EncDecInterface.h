@@ -2,8 +2,9 @@
 #define   __ENCDECINTERFACE_H__
 
 
-typedef int (*EncDataFunc)(unsigned int *inData,int inDataLen,\
-                           unsigned int *outData,int *outDataLen,\
-                           void *Ref,int Reflen
-                           );
+#define ENCDATAMAXSIZE       (15)
+
+typedef unsigned int (QueueElemType)[ENCDATAMAXSIZE]; //frist Index  data lenght
+
+typedef int (*EncDataFunc)(QueueElemType *inData,QueueElemType *outData,void *Ref,int Reflen);
 #endif
