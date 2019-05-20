@@ -20,10 +20,10 @@ FIFOStatus EnFIFO(FIFO_QUEUE *QUEUE_FIFO,QueueElemType ElemData)
         return FIFO_FULL;
 
     /*data length*/
-    tempdatalen = ElemData[0];
+    tempdatalen = ElemData.datalen;
     
     /*data copy*/
-    memcpy(QUEUE_FIFO->Data[QUEUE_FIFO->rear],ElemData[1],tempdatalen);
+    memcpy(&QUEUE_FIFO->Data[QUEUE_FIFO->rear].data[0],&ElemData.data[0],tempdatalen);
 
     QUEUE_FIFO->rear = (QUEUE_FIFO->rear+1)%FIFOQUEUEMAXSIZE;
 
@@ -36,7 +36,8 @@ FIFOStatus DeFIFO(FIFO_QUEUE *QUEUE_FIFO,QueueElemType *ElemData)
     if( QUEUE_FIFO->front == QUEUE_FIFO->rear)
         return FIFO_EMPTY;
     /*data copy*/
-    memcpy(ElemData[0],QUEUE_FIFO->Data[QUEUE_FIFO->front],QUEUE_FIFO->Data[QUEUE_FIFO->front][0]);
+    ElemData->datalen=QUEUE_FIFO->Data[QUEUE_FIFO->front].datalen;
+    memcpy(&ElemData->data[0],&QUEUE_FIFO->Data[QUEUE_FIFO->front].data[0],ElemData->datalen);
     QUEUE_FIFO->front = (QUEUE_FIFO->front+1)%FIFOQUEUEMAXSIZE;
 
     return FIFO_OK;
